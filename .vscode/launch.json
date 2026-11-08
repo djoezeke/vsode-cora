@@ -1,0 +1,42 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Cora Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/client"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/client/out/**/*.js",
+        "${workspaceFolder}/server/out/**/*.js"
+      ],
+      "preLaunchTask": "build Cora extension"
+    },
+    {
+      "name": "Debug Cora Server",
+      "type": "node",
+      "request": "attach",
+      "port": 6009,
+      "restart": true,
+      "outFiles": [
+        "${workspaceFolder}/server/out/**/*.js"
+      ],
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Run and Debug Cora",
+      "configurations": [
+        "Run Cora Extension",
+        "Debug Cora Server"
+      ],
+      "stopAll": true
+    }
+  ]
+}

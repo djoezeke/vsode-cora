@@ -1,0 +1,17 @@
+node_modules/
+
+# TypeScript build output
+out/
+client/out/
+server/out/
+
+# The client build copies the server here for packaged extensions.
+client/server/*
+
+# VS Code extension packages
+*.vsix
+
+# Local logs and editor state
+*.log
+.DS_Store
+.vscode-test/

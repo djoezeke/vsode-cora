@@ -1,0 +1,90 @@
+{
+  "name": "cora-vscode",
+  "displayName": "Cora Language Support",
+  "description": "Language support for the Cora programming language.",
+  "version": "0.1.0",
+  "publisher": "cora-language",
+  "license": "MIT",
+  "engines": {
+    "vscode": ">=1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "cora",
+    "language",
+    "lsp"
+  ],
+  "activationEvents": [
+    "onLanguage:cora"
+  ],
+  "main": "./out/extension.js",
+  "files": [
+    "out/**",
+    "server",
+    "language-configuration.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "cora",
+        "aliases": [
+          "Cora",
+          "cora"
+        ],
+        "extensions": [
+          ".cora"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "cora.restartLanguageServer",
+        "title": "Cora: Restart Language Server"
+      }
+    ],
+    "configuration": {
+      "title": "Cora",
+      "properties": {
+        "cora.server.path": {
+          "type": "string",
+          "default": "",
+          "description": "Optional absolute path to a custom Cora language server entry point. Leave empty to use the bundled server."
+        },
+        "cora.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "enumDescriptions": [
+            "Disable LSP tracing.",
+            "Trace LSP messages without payload details.",
+            "Trace complete LSP messages."
+          ],
+          "default": "off",
+          "description": "Controls tracing for the Cora language server."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./tsconfig.json && node ./scripts/copy-server.mjs",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit",
+    "clean": "node ./scripts/clean.mjs"
+  },
+  "dependencies": {
+    "vscode-jsonrpc": "^8.2.0",
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.7.2"
+  }
+}
